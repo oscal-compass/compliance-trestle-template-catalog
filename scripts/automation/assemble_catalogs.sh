@@ -4,9 +4,9 @@ source config.env
 
 version_tag=$1
 if [ "$1" != "" ]; then 
-	echo "Assembling ${catalog} with version ${version_tag}"
-	trestle author catalog-assemble --markdown md_catalogs/$catalog --output $catalog --version $version_tag 
+	echo "Assembling ${CATALOG} with version ${version_tag}"
+	trestle author catalog-assemble --markdown md_catalogs/$CATALOG --output $CATALOG --version $version_tag 
 else
-	echo "Assembling ${catalog}"
-	trestle author catalog-assemble --markdown md_catalogs/$catalog --output $catalog
+	echo "Assembling ${CATALOG}"
+	trestle author catalog-assemble --markdown md_catalogs/$CATALOG --output $CATALOG
 fi

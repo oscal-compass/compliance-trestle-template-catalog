@@ -1,3 +1,7 @@
+#!/bin/bash
+
+source config.env
+
 version_tag=$1
 if [ "$1" != "" ]; then 
 	echo "Assembling ${catalog} with version ${version_tag}"

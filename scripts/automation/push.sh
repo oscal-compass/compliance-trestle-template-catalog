@@ -47,6 +47,11 @@ function github-branch-commit() {
         return 1
     fi
     if [[ $GIT_BRANCH = main ]]; then
+    	# if initial delivery (no version tag), then nothing to do
+    	if [ -z "${VERSION_TAG}" ]; then
+    		msg "Initial delivery, nothing to commit"
+    		return 0
+    	fi
         echo "Version tag: ${VERSION_TAG}" 
         if ! git push --delete origin "v${VERSION_TAG}"; then
             err "failed to delete git tag: v${VERSION_TAG}"

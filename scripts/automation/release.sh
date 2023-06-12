@@ -15,5 +15,5 @@ fi
 
 ./scripts/automation/assemble_catalogs.sh $version_tag
 git config --global user.email "$EMAIL"
-git config --global user.name "Automation Bot" 
+git config --global user.name "$ENAME" 
 semantic-release publish

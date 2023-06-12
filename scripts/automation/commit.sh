@@ -1,13 +1,15 @@
 #!/bin/bash
 
+source config.env
+
 function github-branch-commit() {
     msg "Github ref $GITHUB_REF" 
     GIT_BRANCH=${GITHUB_REF##*/}
     msg "Github branch: ($GIT_BRANCH)" 
     local head_ref branch_ref
     head_ref=$(git rev-parse HEAD)
-    git config --global user.email "automation@example.com"
-    git config --global user.name "Automation Bot" 
+    git config --global user.email "$EMAIL"
+    git config --global user.name "$ENAME" 
     if [[ $? -ne 0 || ! $head_ref ]]; then
         err "failed to get HEAD reference"
         return 1

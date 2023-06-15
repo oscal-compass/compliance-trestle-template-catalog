@@ -47,6 +47,10 @@ function github-branch-commit() {
         return 1
     fi
     if [[ $GIT_BRANCH = main ]]; then
+    	if [ -z  "${VERSION_TAG}" ]; then
+    		msg "Nothing to push, version unchanged" 
+        	return 0 
+    	fi
         echo "Version tag: ${VERSION_TAG}" 
         if ! git push --delete origin "v${VERSION_TAG}"; then
             err "failed to delete git tag: v${VERSION_TAG}"

@@ -16,7 +16,7 @@ else
   if [ -z "$(git status --untracked-files=no --porcelain)" ]; then 
      echo "Nothing to commit"
   else
-     git commit --signoff --message "$COMMIT_TITLE"
+     git commit --message "$COMMIT_TITLE"
      remote=$URL_PROFILE
      git push -u "$remote" "catalogs_autoupdate_$GITHUB_RUN_ID"
      echo $COMMIT_BODY

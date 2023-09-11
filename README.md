@@ -38,7 +38,7 @@ Steps to modify the catalog repository with an updated catalog are given below:
 
 <details>
 <summary>visual</summary>
-<img src="drawio/ss.update-catalog.drawio.png" width="500" height="600">
+<img src="drawio/ss.copy-catalog.drawio.png" width="500" height="600">
 </details>
 
 ###### 3. compare & pull request

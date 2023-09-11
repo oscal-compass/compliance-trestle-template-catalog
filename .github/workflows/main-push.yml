@@ -13,10 +13,10 @@ jobs:
         submodules: true
         fetch-depth: 0
         token: ${{ secrets.GIT_TOKEN }}
-    - name: Set up Python 3.8
+    - name: Set up Python 3.9
       uses: actions/setup-python@v2
       with:
-        python-version: 3.8
+        python-version: 3.9
     - name: Install Trestle
       run: bash scripts/automation/install_trestle.sh
     - name: Release
@@ -42,7 +42,7 @@ jobs:
         token: ${{ secrets.GIT_TOKEN }}
         fetch-depth: 0
     - name: Update profiles
-      run: bash scripts/automation/update_profile.sh
+      run: bash scripts/automation/update_downstream.sh
       env:
         GH_TOKEN: ${{ secrets.GIT_TOKEN }}
   merge-main-to-develop:

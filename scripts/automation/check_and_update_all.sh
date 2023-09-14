@@ -22,6 +22,8 @@ for val in ${CHANGES[@]} ; do
   fi
 done
 
+echo "md_changed = $md_changed, json_changed = $json_changed"
+
 if [[ $json_changed = true ]]; then
     echo "Json file(s) were changed, regenerating markdowns..."
     ./scripts/automation/regenerate_catalogs.sh
@@ -32,5 +34,3 @@ if [[ $md_changed = true ]]; then
     echo "Md file(s) were changed, assembling catalog..."
     ./scripts/automation/assemble_catalogs.sh
 fi
-
-echo "$md_changed $json_changed changed"

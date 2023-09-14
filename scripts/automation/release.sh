@@ -7,10 +7,11 @@ echo "Bumping version of catalogs to ${version_tag}"
 export VERSION_TAG="$version_tag"
 echo "VERSION_TAG=${VERSION_TAG}" >> $GITHUB_ENV
 
+# There is no md but json has at least one control
 COUNT=$(ls -l md_catalogs | grep ^- | wc -l)
 if [ $COUNT -lt 1 ]
 then
-	./scripts/automation/regenerate_catalogs.sh $version_tag
+	./scripts/automation/regenerate_catalogs.sh 
 fi
 
 ./scripts/automation/assemble_catalogs.sh $version_tag

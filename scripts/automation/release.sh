@@ -8,7 +8,7 @@ COUNT_CATALOGS=$(ls -l catalogs | grep ^- | wc -l)
 let "INITIALIZED = $COUNT_CATALOG_MD + $COUNT_CATALOGS"
 if [ $INITIALIZED -eq 0 ]
 then
-	echo "no catalog or markdown, nothing to do"
+	echo "release: no catalog or markdown, nothing to do"
 	exit 0
 fi
 

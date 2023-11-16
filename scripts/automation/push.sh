@@ -92,7 +92,7 @@ COUNT_CATALOGS=$(ls -l catalogs | grep ^- | wc -l)
 let "INITIALIZED = $COUNT_CATALOG_MD + $COUNT_CATALOGS"
 if [ $INITIALIZED -eq 0 ]
 then
-	echo "push: no catalog or markdown, nothing to do
+	echo "push: no catalog or markdown, nothing to do"
 else
 	github-branch-commit
 fi

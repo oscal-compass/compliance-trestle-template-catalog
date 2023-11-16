@@ -9,22 +9,19 @@ let "INITIALIZED = $COUNT_CATALOG_MD + $COUNT_CATALOGS"
 if [ $INITIALIZED -eq 0 ]
 then
 	echo "release: no catalog or markdown, nothing to do"
-	exit 0
+else
+	version_tag=$(semantic-release print-version)
+	echo "Bumping version of catalogs to ${version_tag}" 
+	export VERSION_TAG="$version_tag"
+	echo "VERSION_TAG=${VERSION_TAG}" >> $GITHUB_ENV
+	# There is no md but json has at least one control
+	COUNT=$(ls -l md_catalogs | grep ^- | wc -l)
+	if [ $COUNT -lt 1 ]
+	then
+		./scripts/automation/regenerate_catalogs.sh 
+	fi
+	./scripts/automation/assemble_catalogs.sh $version_tag
+	git config --global user.email "$EMAIL"
+	git config --global user.name "$NAME" 
+	semantic-release publish
 fi
-
-version_tag=$(semantic-release print-version)
-echo "Bumping version of catalogs to ${version_tag}" 
-export VERSION_TAG="$version_tag"
-echo "VERSION_TAG=${VERSION_TAG}" >> $GITHUB_ENV
-
-# There is no md but json has at least one control
-COUNT=$(ls -l md_catalogs | grep ^- | wc -l)
-if [ $COUNT -lt 1 ]
-then
-	./scripts/automation/regenerate_catalogs.sh 
-fi
-
-./scripts/automation/assemble_catalogs.sh $version_tag
-git config --global user.email "$EMAIL"
-git config --global user.name "$NAME" 
-semantic-release publish

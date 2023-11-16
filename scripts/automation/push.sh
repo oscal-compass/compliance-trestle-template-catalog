@@ -2,16 +2,6 @@
 
 source config.env
 
-# If there is no catalog or markdown, then there is nothing to do
-COUNT_CATALOG_MD=$(ls -l md_catalogs | grep ^- | wc -l)
-COUNT_CATALOGS=$(ls -l catalogs | grep ^- | wc -l)
-let "INITIALIZED = $COUNT_CATALOG_MD + $COUNT_CATALOGS"
-if [ $INITIALIZED -eq 0 ]
-then
-	echo "push: no catalog or markdown, nothing to do"
-	exit 0
-fi
-
 function github-branch-commit() {
     msg "Github ref $GITHUB_REF" 
     GIT_BRANCH=${GITHUB_REF##*/}
@@ -96,4 +86,14 @@ function err() {
     msg "$*" 1>&2
 }
 
-github-branch-commit
+# If there is no catalog or markdown, then there is nothing to do
+COUNT_CATALOG_MD=$(ls -l md_catalogs | grep ^- | wc -l)
+COUNT_CATALOGS=$(ls -l catalogs | grep ^- | wc -l)
+let "INITIALIZED = $COUNT_CATALOG_MD + $COUNT_CATALOGS"
+if [ $INITIALIZED -eq 0 ]
+then
+	echo "push: no catalog or markdown, nothing to do
+else
+	github-branch-commit
+fi
+

@@ -2,15 +2,13 @@
 
 source config.env
 
-# If there is no catalog or markdown, then there is nothing to do
-COUNT_CATALOG_MD=$(ls -l md_catalogs | grep ^- | wc -l)
 COUNT_CATALOGS=$(ls -l catalogs | grep ^- | wc -l)
-let "INITIALIZED = $COUNT_CATALOG_MD + $COUNT_CATALOGS"
-if [ $INITIALIZED -eq 0 ]
+COUNT_CATALOG_MD=$(ls -l md_catalogs | grep ^- | wc -l)
+if [ "$COUNT_CATALOGS" == "0" ] || [ "$COUNT_CATALOG_MD" == "0" ]
 then
-	echo "release: no catalog or markdown, nothing to do"
+    echo "no catalog or markdown present -> nothing to do"
 else
-	version_tag=$(semantic-release print-version)
+    version_tag=$(semantic-release print-version)
 	echo "Bumping version of catalogs to ${version_tag}" 
 	export VERSION_TAG="$version_tag"
 	echo "VERSION_TAG=${VERSION_TAG}" >> $GITHUB_ENV

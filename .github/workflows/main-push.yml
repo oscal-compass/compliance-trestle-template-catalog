@@ -46,8 +46,8 @@ jobs:
       if: steps.determine_initialization_status.outputs.exitcode == '1'
       uses: actions/checkout@v2
       with:
-        repository: degenaro/acme-profile-nist-800-53
-        path: 'acme-profile-nist-800-53'
+        repository: my-repo-base/my-profile
+        path: './my-profile'
         token: ${{ secrets.GIT_TOKEN }}
         fetch-depth: 0
     - name: Update profiles

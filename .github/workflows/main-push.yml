@@ -50,7 +50,7 @@ jobs:
         path: './my-profile'
         token: ${{ secrets.GIT_TOKEN }}
         fetch-depth: 0
-    - name: Update profiles
+    - name: Update downstream
       if: steps.determine_initialization_status.outputs.exitcode == '1'
       run: bash scripts/automation/update_downstream.sh
       env:

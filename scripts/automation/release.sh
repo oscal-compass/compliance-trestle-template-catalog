@@ -2,8 +2,8 @@
 
 source config.env
 
-COUNT_CATALOGS=$(ls -l catalogs | grep ^- | wc -l)
-COUNT_CATALOG_MD=$(ls -l md_catalogs | grep ^- | wc -l)
+COUNT_CATALOGS=$(ls -1 catalogs | wc -l)
+COUNT_CATALOG_MD=$(ls -1 md_catalogs | wc -l)
 if [ "$COUNT_CATALOGS" == "0" ] || [ "$COUNT_CATALOG_MD" == "0" ]
 then
     echo "no catalog or markdown present -> nothing to do"
@@ -13,7 +13,7 @@ else
 	export VERSION_TAG="$version_tag"
 	echo "VERSION_TAG=${VERSION_TAG}" >> $GITHUB_ENV
 	# There is no md but json has at least one control
-	COUNT=$(ls -l md_catalogs | grep ^- | wc -l)
+	COUNT=$(ls -1 md_catalogs | wc -l)
 	if [ $COUNT -lt 1 ]
 	then
 		./scripts/automation/regenerate_catalogs.sh 

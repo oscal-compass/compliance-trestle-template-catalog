@@ -86,8 +86,8 @@ function err() {
     msg "$*" 1>&2
 }
 
-COUNT_CATALOGS=$(ls -l catalogs | grep ^- | wc -l)
-COUNT_CATALOG_MD=$(ls -l md_catalogs | grep ^- | wc -l)
+COUNT_CATALOGS=$(ls -1 catalogs | wc -l)
+COUNT_CATALOG_MD=$(ls -1 md_catalogs | wc -l)
 if [ "$COUNT_CATALOGS" == "0" ] || [ "$COUNT_CATALOG_MD" == "0" ]
 then
     echo "no catalog or markdown present -> nothing to do"

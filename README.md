@@ -2,8 +2,7 @@
 
 compliance-trestle repository for agile authoring of catalog
 
-Prerequisite: [catalog template](https://github.com/IBM/compliance-trestle-template-catalog) has been used to [create catalog repo](https://github.com/IBM/compliance-trestle-agile-authoring/blob/main/README.create-repo-catalog.md) for agile authoring.
-
+Prerequisite: [catalog template](https://github.com/IBM/compliance-trestle-template-catalog) has been used to create catalog repo for [agile authoring](https://github.com/IBM/compliance-trestle-agile-authoring).
 
 - [view catalog markdown](#view-catalog-markdown)
 - [update catalog](#update-catalog)

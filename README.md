@@ -74,8 +74,6 @@ Steps to modify the catalog repository with an updated catalog are given below:
 
 ##### references
 
-- [documentation: setup catalog repo](https://github.com/IBM/compliance-trestle-agile-authoring/blob/main/README.create-repo-catalog.md)
-
 - [documentation: agile authoring](https://github.com/IBM/compliance-trestle-agile-authoring#compliance-trestle-agile-authoring)
 
 

@@ -42,7 +42,7 @@ function github-branch-commit() {
         return 0 
     fi
     # make Github CI skip this build
-    if ! git commit -m "Autoupdate [ci skip]"; then
+    if ! git commit -m "Autoupdate [ci skip]" -s; then
         err "failed to commit updates"
         return 1
     fi

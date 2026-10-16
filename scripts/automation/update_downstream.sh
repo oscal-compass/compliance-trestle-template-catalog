@@ -20,9 +20,11 @@ git config --global user.name "$NAME"
 cd "$REPO_PROFILE"
 
 git fetch origin
+# Capture PR state once to avoid a race between checkout and push decisions.
+open_pr=$(gh pr list -H "$BRANCH" -B develop --state open --json number -q '.[0].number')
 # Reuse the open PR's branch tip when one exists; otherwise start from develop
 # so a leftover branch after merge does not carry stale commits forward.
-if gh pr list -H "$BRANCH" -B develop --state open --json number -q '.[0].number' | grep -q .; then
+if [ -n "$open_pr" ]; then
   git checkout -B "$BRANCH" "origin/$BRANCH"
 else
   # No open PR: start fresh from develop (replaces a stale post-merge branch).
@@ -39,7 +41,7 @@ else
   else
      git commit --message "$COMMIT_TITLE"
      remote=$URL_PROFILE
-     if gh pr list -H "$BRANCH" -B develop --state open --json number -q '.[0].number' | grep -q .; then
+     if [ -n "$open_pr" ]; then
        # Bundle: push onto the existing open PR.
        git push -u "$remote" "$BRANCH"
        echo "Updated existing open PR on $BRANCH"

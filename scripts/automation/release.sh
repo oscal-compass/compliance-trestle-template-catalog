@@ -9,15 +9,15 @@ if [ "$COUNT_CATALOGS" == "0" ] || [ "$COUNT_CATALOG_MD" == "0" ]
 then
     echo "no catalog or markdown present -> nothing to do"
 else
-    next_version=$(semantic-release version --print 2>/dev/null || true)
-    last_version=$(semantic-release version --print-last-released 2>/dev/null || true)
-    # Match v7: empty VERSION_TAG when nothing to release.
-    # Untagged repos: PSR prints 0.0.0 with no bump commits — skip that stamp.
-    if [ "$next_version" = "$last_version" ] || { [ -z "$last_version" ] && [ "$next_version" = "0.0.0" ]; }; then
-        version_tag=""
-    else
-        version_tag="$next_version"
-    fi
+	next_version=$(semantic-release version --print 2>/dev/null || true)
+	last_version=$(semantic-release version --print-last-released 2>/dev/null || true)
+	# Match v7: empty VERSION_TAG when nothing to release.
+	# Untagged repos: PSR prints 0.0.0 with no bump commits — skip that stamp.
+	if [ "$next_version" = "$last_version" ] || { [ -z "$last_version" ] && [ "$next_version" = "0.0.0" ]; }; then
+		version_tag=""
+	else
+		version_tag="$next_version"
+	fi
 	echo "Bumping version of catalogs to ${version_tag}" 
 	export VERSION_TAG="$version_tag"
 	echo "VERSION_TAG=${VERSION_TAG}" >> $GITHUB_ENV

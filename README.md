@@ -6,6 +6,7 @@ Prerequisite: [catalog template](https://github.com/IBM/compliance-trestle-templ
 
 - [view catalog markdown](#view-catalog-markdown)
 - [update catalog](#update-catalog)
+- [downstream profile update](#downstream-profile-update)
 
 -----
 
@@ -69,6 +70,19 @@ Steps to modify the catalog repository with an updated catalog are given below:
 <summary>visual</summary>
 <img src="drawio/ss.merge-pull-request.drawio.png" width="500" height="600">
 </details>
+
+-----
+
+##### downstream profile update
+
+After a release on `main`, CI runs `scripts/automation/update_downstream.sh` to sync assembled catalogs into the configured downstream profile repository.
+
+That script keeps a single open PR against `develop` on the fixed branch `catalogs_autoupdate`:
+
+- **No open PR** — reset the branch from `develop`, push it, and open a new PR.
+- **Open PR already exists** — commit on top of that branch and push so the new catalog sync is bundled into the existing PR (instead of opening another PR per run).
+
+Once the PR is merged, the next sync with no open PR starts fresh from `develop` again.
 
 -----
 

@@ -1,0 +1,11 @@
+[tool.semantic_release]
+allow_zero_version = true
+build_command = "python --version"
+tag_format = "v{version}"
+
+[tool.semantic_release.branches.main]
+match = "^(main)$"
+prerelease = false
+
+[tool.semantic_release.publish]
+upload_to_vcs_release = false

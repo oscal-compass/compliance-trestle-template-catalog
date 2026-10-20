@@ -1,4 +1,5 @@
 #!/bin/bash
+set -eo pipefail
 
 source config.env
 
@@ -51,12 +52,10 @@ function github-branch-commit() {
     		msg "Nothing to push, version unchanged" 
         	return 0 
     	fi
-        echo "Version tag: ${VERSION_TAG}" 
-        if ! git push --delete origin "v${VERSION_TAG}"; then
-            err "failed to delete git tag: v${VERSION_TAG}"
-            return 1
-        fi
-        git tag -d "v${VERSION_TAG}"
+        echo "Version tag: ${VERSION_TAG}"
+        # First release: tag may not exist yet; ignore delete failures.
+        git push --delete origin "v${VERSION_TAG}" 2>/dev/null || true
+        git tag -d "v${VERSION_TAG}" 2>/dev/null || true
         echo "Adding version tag v${VERSION_TAG} to branch $GIT_BRANCH"
         if ! git tag "v${VERSION_TAG}" -m "Bump version"; then
             err "failed to create git tag: v${VERSION_TAG}"

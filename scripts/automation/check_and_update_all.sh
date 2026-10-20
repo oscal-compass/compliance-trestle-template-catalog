@@ -1,4 +1,5 @@
 #!/bin/bash
+set -eo pipefail
 
 CHANGES=`git diff-tree --no-commit-id --name-only -r HEAD`
 

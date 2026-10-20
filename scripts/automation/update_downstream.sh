@@ -5,8 +5,8 @@
 # - If an open PR already exists for that branch, append the new commit and
 #   push so changes are bundled into the existing PR (avoids duplicate PRs /
 #   merge conflicts from per-run branches).
-# - If no open PR exists, reset the branch from develop, force-push with
-#   lease, and open a new PR.
+# - If no open PR exists, reset the branch from develop, force-push, and
+#   open a new PR.
 set -eo pipefail
 
 source config.env
@@ -47,7 +47,10 @@ else
        echo "Updated existing open PR on $BRANCH"
      else
        # No open PR: publish a fresh branch and open a new PR.
-       git push -u --force-with-lease "$remote" "$BRANCH"
+       # Plain --force is used because $remote is a URL, not a named remote;
+       # bare --force-with-lease would reject with (stale info) when a
+       # leftover branch still exists on the remote after a PR merge.
+       git push -u --force "$remote" "$BRANCH"
        echo "$COMMIT_BODY"
        gh pr create -t "$COMMIT_TITLE" -b "$COMMIT_BODY" -B "develop" -H "$BRANCH"
      fi
